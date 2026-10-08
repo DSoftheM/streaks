@@ -1,4 +1,5 @@
 /* Browser-only Supabase sync. The publishable key is safe in a client app; never use a secret key here. */
+(() => {
 const CONFIG_KEY = 'daily-streaks-supabase-config';
 const DATA_KEYS = ['daily-streaks-v1', 'daily-streaks-tasks-v1'];
 let client, timer;
@@ -45,3 +46,4 @@ async function updateButton(){const button=$('#cloud-sync');if(!button)return;co
 async function init(){inject();$('#cloud-sync')?.addEventListener('click',()=>$('#sync-dialog').showModal());const db=getClient();if(db){const remote=await pull();if(!remote)await syncNow();}updateButton();}
 window.DailySync={queue,syncNow};
 window.addEventListener('DOMContentLoaded',init);
+})();
