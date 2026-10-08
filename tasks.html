@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101512" /><title>Tasks · Daily Streaks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="tasks.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">↗</span>daily<span>streaks</span></a><nav class="app-tabs" aria-label="App sections"><a href="index.html">Streaks</a><a class="active" href="tasks.html">Tasks</a></nav><span class="local">LOCAL ONLY</span></header>
+      <section class="hero"><div><p class="eyebrow">YOUR WORKSPACE</p><h1>Clear the next<br /><em>small thing.</em></h1></div><button id="add-root" class="primary">+ New task</button></section>
+      <section class="task-head"><div><p class="eyebrow">TO DO</p><h2 id="open-summary">No open tasks</h2></div><p>Complete every subtask to finish its parent.</p></section>
+      <section id="task-list" class="task-list" aria-live="polite"></section>
+      <section id="empty-state" class="empty"><div>✦</div><h2>Nothing waiting.</h2><p>Add a task, then break it down as far as you need.</p><button id="add-empty" class="primary">Create a task</button></section>
+      <section id="completed-section" class="completed-section" hidden><button id="toggle-completed" class="completed-toggle">Completed <span id="completed-count"></span> <b>⌄</b></button><div id="completed-list" hidden></div></section>
+      <footer>Tasks are stored privately in this browser.</footer>
+    </main>
+    <dialog id="task-dialog"><form id="task-form" method="dialog"><div class="dialog-title"><div><p class="eyebrow" id="dialog-kicker">NEW TASK</p><h2 id="dialog-title">What needs doing?</h2></div><button class="icon-button" type="button" data-close>×</button></div><label>Task name<input required name="title" maxlength="120" placeholder="e.g. Plan next week's meals" /></label><div class="form-actions"><button class="secondary" type="button" data-close>Cancel</button><button class="primary" type="submit" id="save-task">Add task</button></div></form></dialog>
+    <script src="tasks.js"></script>
+  </body>
+</html>

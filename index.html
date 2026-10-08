@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <style>
+      .app-tabs{display:flex;gap:4px;margin-left:auto;margin-right:26px;background:#edf1ea;padding:4px;border-radius:9px}.app-tabs a{padding:6px 10px;border-radius:6px;color:#627066;text-decoration:none;font-size:13px;font-weight:500}.app-tabs a.active{background:#fff;color:#12633a;box-shadow:0 1px 2px #cdd5ca}
       .stats-dialog-body{padding:25px}.activity-wrap{cursor:pointer}.activity-wrap:hover .activity{filter:brightness(.94)}.activity-wrap:focus-visible{outline:2px solid #3e9d63;outline-offset:4px;border-radius:4px}.full-calendar-head{display:flex;justify-content:space-between;font:10px 'DM Mono',monospace;color:#627066;margin:20px 0 9px}.full-calendar-head .cube{margin:0 3px}.full-calendar{display:grid;grid-template-columns:repeat(auto-fill,minmax(13px,1fr));gap:4px;padding:12px;background:#f5f7f2;border-radius:9px}.full-calendar i{aspect-ratio:1;border-radius:3px;background:#e4e9e2;min-width:13px}.full-calendar i.done{background:#3e9d63}.full-calendar i.today{outline:2px solid #12633a;outline-offset:1px}.full-calendar i.future{background:#fafbf8;border:1px solid #edf0ea}.day-list{max-height:220px;overflow:auto;margin-top:16px;border-top:1px solid #dce2d9}.day-row{display:flex;justify-content:space-between;padding:9px 2px;border-bottom:1px solid #edf0ea;font-size:13px}.day-row span:last-child{color:#627066}.day-row .complete{color:#3e9d63;font-weight:600}.day-row .future-text{color:#a4aea4}@media(max-width:650px){.full-calendar-head{gap:8px}.full-calendar{grid-template-columns:repeat(auto-fill,minmax(11px,1fr));gap:3px}}
     </style>
   </head>
@@ -17,6 +18,7 @@
     <main class="app-shell">
       <header class="topbar">
         <a class="brand" href="#"><span class="brand-mark">↗</span>daily<span>streaks</span></a>
+        <nav class="app-tabs" aria-label="App sections"><a class="active" href="index.html">Streaks</a><a href="tasks.html">Tasks</a></nav>
         <div class="date-block"><span id="today-label"></span><strong id="today-date"></strong></div>
       </header>
 
