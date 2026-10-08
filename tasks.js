@@ -1,3 +1,4 @@
+(() => {
 const KEY='daily-streaks-tasks-v1'; const $=s=>document.querySelector(s); let tasks=load(), editing=null, addingTo=null, draggingId=null, movingId=null;
 function load(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch{return[]}}
 function save(){localStorage.setItem(KEY,JSON.stringify(tasks));window.DailySync?.queue()}
@@ -27,3 +28,4 @@ document.body.addEventListener('dragend',e=>{draggingId=null;document.querySelec
 document.body.addEventListener('dragover',e=>{if(!draggingId)return;const target=e.target.closest('.task-node');const source=find(tasks,draggingId)?.node;if(target&&source&&!contains(source,target.dataset.id)&&target.dataset.id!==draggingId){e.preventDefault();clearDropTargets();target.classList.add('drop-target');return}const root=e.target.closest('#task-list');if(root){e.preventDefault();clearDropTargets();root.classList.add('root-drop')}});
 document.body.addEventListener('dragleave',e=>{if(!e.currentTarget.contains(e.relatedTarget))clearDropTargets()});
 document.body.addEventListener('drop',e=>{if(!draggingId)return;const sourceHit=find(tasks,draggingId);if(!sourceHit)return;const targetCard=e.target.closest('.task-node');const target=targetCard&&find(tasks,targetCard.dataset.id);const source=sourceHit.node;if(target&&target.node.id!==source.id&&!contains(source,target.node.id)){e.preventDefault();sourceHit.nodes.splice(sourceHit.nodes.indexOf(source),1);target.node.children=target.node.children||[];target.node.children.push(source);target.node.done=false;syncParents();save();render()}else if(e.target.closest('#task-list')){e.preventDefault();if(sourceHit.nodes!==tasks){sourceHit.nodes.splice(sourceHit.nodes.indexOf(source),1);tasks.unshift(source);syncParents();save();render()}}clearDropTargets()});
+})();

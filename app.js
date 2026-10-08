@@ -1,3 +1,4 @@
+(() => {
 const KEY = 'daily-streaks-v1';
 const $ = s => document.querySelector(s);
 const dateKey = (d = new Date()) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).toISOString().slice(0, 10);
@@ -67,3 +68,4 @@ $('#extend-form').onsubmit=e=>{e.preventDefault();const g=state.goals.find(x=>x.
 $('#reset-data').onclick=()=>{if(confirm('Remove all goals and completion history from this browser?')){state={goals:[]};save();render();}};
 window.addEventListener('daily-sync-pulled',()=>{state=load();render();});
 render();
+})();
