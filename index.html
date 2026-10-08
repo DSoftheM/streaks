@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101512" />
+    <title>Daily Streaks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#"><span class="brand-mark">↗</span>daily<span>streaks</span></a>
+        <div class="date-block"><span id="today-label"></span><strong id="today-date"></strong></div>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">YOUR DAILY PRACTICE</p>
+          <h1>Small actions.<br /><em>Long momentum.</em></h1>
+        </div>
+        <div class="hero-progress">
+          <p><strong id="done-count">0</strong> of <strong id="goal-count">0</strong> done today</p>
+          <div class="progress-track"><i id="day-progress"></i></div>
+          <button class="text-button" id="add-goal-top">+ Add a new goal</button>
+        </div>
+      </section>
+
+      <section class="dashboard-head">
+        <div><p class="eyebrow">TODAY'S GOALS</p><h2>Make today count</h2></div>
+        <div class="legend"><span><i class="cube none"></i> Not done</span><span><i class="cube done"></i> Done</span></div>
+      </section>
+      <section id="goals" class="goals" aria-live="polite"></section>
+
+      <section id="empty-state" class="empty-state" hidden>
+        <div class="empty-icon">✦</div>
+        <h2>A clean slate.</h2>
+        <p>Create a daily goal and turn small effort into an unbroken habit.</p>
+        <button class="primary" id="add-goal-empty">Create your first goal</button>
+      </section>
+
+      <footer><span>Stored privately in your browser</span><button class="text-button danger" id="reset-data">Reset all data</button></footer>
+    </main>
+
+    <dialog id="goal-dialog">
+      <form id="goal-form" method="dialog">
+        <div class="dialog-title"><div><p class="eyebrow" id="form-kicker">NEW DAILY GOAL</p><h2 id="form-title">Start a streak</h2></div><button class="icon-button" type="button" data-close>×</button></div>
+        <label>What do you want to do every day?<input required name="title" maxlength="70" placeholder="e.g. Learn Go" /></label>
+        <div class="form-row"><label>Daily target<input required name="target" maxlength="45" placeholder="e.g. 30 minutes" /></label><label>Commit for (days)<input required name="days" type="number" min="1" max="3650" value="30" /></label></div>
+        <label class="check-label"><input name="hasTimer" type="checkbox" /><span><strong>Use a focus timer</strong><small>Start a timer when you work on this goal.</small></span></label>
+        <label id="duration-field" hidden>Timer duration (minutes)<input name="duration" type="number" min="1" max="1440" value="30" /></label>
+        <div class="form-actions"><button class="secondary" type="button" data-close>Cancel</button><button class="primary" id="save-goal" type="submit">Create goal</button></div>
+      </form>
+    </dialog>
+
+    <dialog id="extend-dialog">
+      <form id="extend-form" method="dialog">
+        <div class="dialog-title"><div><p class="eyebrow">KEEP GOING</p><h2>Extend your commitment</h2></div><button class="icon-button" type="button" data-close>×</button></div>
+        <p class="dialog-copy">Add more days to <strong id="extend-name"></strong>. Your streak stays intact.</p>
+        <label>Additional days<input required name="extendDays" type="number" min="1" max="3650" value="30" /></label>
+        <div class="form-actions"><button class="secondary" type="button" data-close>Cancel</button><button class="primary" type="submit">Extend goal</button></div>
+      </form>
+    </dialog>
+    <script src="app.js"></script>
+  </body>
+</html>
