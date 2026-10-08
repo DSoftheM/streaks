@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <style>
+      .stats-dialog-body{padding:25px}.activity-wrap{cursor:pointer}.activity-wrap:hover .activity{filter:brightness(.94)}.activity-wrap:focus-visible{outline:2px solid #3e9d63;outline-offset:4px;border-radius:4px}.full-calendar-head{display:flex;justify-content:space-between;font:10px 'DM Mono',monospace;color:#627066;margin:20px 0 9px}.full-calendar-head .cube{margin:0 3px}.full-calendar{display:grid;grid-template-columns:repeat(auto-fill,minmax(13px,1fr));gap:4px;padding:12px;background:#f5f7f2;border-radius:9px}.full-calendar i{aspect-ratio:1;border-radius:3px;background:#e4e9e2;min-width:13px}.full-calendar i.done{background:#3e9d63}.full-calendar i.today{outline:2px solid #12633a;outline-offset:1px}.full-calendar i.future{background:#fafbf8;border:1px solid #edf0ea}.day-list{max-height:220px;overflow:auto;margin-top:16px;border-top:1px solid #dce2d9}.day-row{display:flex;justify-content:space-between;padding:9px 2px;border-bottom:1px solid #edf0ea;font-size:13px}.day-row span:last-child{color:#627066}.day-row .complete{color:#3e9d63;font-weight:600}.day-row .future-text{color:#a4aea4}@media(max-width:650px){.full-calendar-head{gap:8px}.full-calendar{grid-template-columns:repeat(auto-fill,minmax(11px,1fr));gap:3px}}
+    </style>
   </head>
   <body>
     <main class="app-shell">
@@ -63,6 +66,15 @@
         <label>Additional days<input required name="extendDays" type="number" min="1" max="3650" value="30" /></label>
         <div class="form-actions"><button class="secondary" type="button" data-close>Cancel</button><button class="primary" type="submit">Extend goal</button></div>
       </form>
+    </dialog>
+    <dialog id="stats-dialog">
+      <div class="stats-dialog-body">
+        <div class="dialog-title"><div><p class="eyebrow">DAILY HISTORY</p><h2 id="stats-title">Goal activity</h2></div><button class="icon-button" type="button" data-close>×</button></div>
+        <p class="dialog-copy" id="stats-summary"></p>
+        <div class="full-calendar-head"><span>Each square is one day</span><span><i class="cube none"></i> Missed <i class="cube done"></i> Complete</span></div>
+        <div id="full-calendar" class="full-calendar"></div>
+        <div id="day-list" class="day-list"></div>
+      </div>
     </dialog>
     <script src="app.js"></script>
   </body>
