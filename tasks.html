@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="tasks.css" />
     <style>
       .drag-hint{margin:-5px 0 16px;color:#627066;font-size:12px}.task-node[draggable="true"]{cursor:grab}.task-node.is-dragging{opacity:.38}.task-node.drop-target>.task-row{background:#eaf6db;outline:2px dashed #3e9d63;outline-offset:-3px}.task-list.root-drop{min-height:56px;outline:2px dashed #3e9d63;outline-offset:5px;border-radius:10px}.task-list.root-drop:empty:after{content:'Drop here to make this a top-level task';display:block;padding:18px;color:#627066;text-align:center;font-size:13px}
+      @media(max-width:650px){.drag-hint{line-height:1.4}.task-row{min-height:52px}.action{min-height:30px}.row-actions{grid-template-columns:1fr 1fr 1fr}.task-node[draggable="true"]{cursor:default}input,select{font-size:16px}}
     </style>
   </head>
   <body>
@@ -22,6 +23,7 @@
       <footer>Tasks are stored privately in this browser.</footer>
     </main>
     <dialog id="task-dialog"><form id="task-form" method="dialog"><div class="dialog-title"><div><p class="eyebrow" id="dialog-kicker">NEW TASK</p><h2 id="dialog-title">What needs doing?</h2></div><button class="icon-button" type="button" data-close>×</button></div><label>Task name<input required name="title" maxlength="120" placeholder="e.g. Plan next week's meals" /></label><div class="form-actions"><button class="secondary" type="button" data-close>Cancel</button><button class="primary" type="submit" id="save-task">Add task</button></div></form></dialog>
+    <dialog id="move-dialog"><form id="move-form" method="dialog"><div class="dialog-title"><div><p class="eyebrow">MOVE TASK</p><h2 id="move-title">Move task</h2></div><button class="icon-button" type="button" data-close>×</button></div><label>Place it under<select id="move-target"></select></label><div class="form-actions"><button class="secondary" type="button" data-close>Cancel</button><button class="primary" type="submit">Move task</button></div></form></dialog>
     <script src="tasks.js"></script>
   </body>
 </html>
