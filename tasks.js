@@ -1,6 +1,6 @@
 const KEY='daily-streaks-tasks-v1'; const $=s=>document.querySelector(s); let tasks=load(), editing=null, addingTo=null, draggingId=null, movingId=null;
 function load(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch{return[]}}
-function save(){localStorage.setItem(KEY,JSON.stringify(tasks))}
+function save(){localStorage.setItem(KEY,JSON.stringify(tasks));window.DailySync?.queue()}
 function id(){return crypto.randomUUID()}
 function find(nodes,target,parent=null){for(const node of nodes){if(node.id===target)return{node,parent,nodes};const hit=find(node.children||[],target,node);if(hit)return hit}return null}
 function descendants(node,value){node.done=value;(node.children||[]).forEach(child=>descendants(child,value))}
@@ -19,6 +19,7 @@ document.body.addEventListener('click',e=>{const button=e.target.closest('[data-
 $('#task-form').onsubmit=e=>{e.preventDefault();const title=e.currentTarget.title.value.trim();if(!title)return;if(editing)find(tasks,editing).node.title=title;else {const newTask={id:id(),title,done:false,children:[]};if(addingTo){const parent=find(tasks,addingTo).node;parent.children.push(newTask);parent.done=false}else tasks.unshift(newTask)}save();close();render()};
 $('#move-form').onsubmit=e=>{e.preventDefault();const sourceHit=find(tasks,movingId);const targetId=$('#move-target').value;if(!sourceHit)return;const source=sourceHit.node;const target=targetId==='root'?null:find(tasks,targetId)?.node;sourceHit.nodes.splice(sourceHit.nodes.indexOf(source),1);if(target){target.children=target.children||[];target.children.push(source);target.done=false}else tasks.unshift(source);syncParents();save();close();render()};
 $('#toggle-completed').onclick=()=>{$('#completed-list').hidden=!$('#completed-list').hidden};render();
+window.addEventListener('daily-sync-pulled',()=>{tasks=load();render()});
 function contains(node, targetId){return node.id===targetId||(node.children||[]).some(child=>contains(child,targetId))}
 function clearDropTargets(){document.querySelectorAll('.drop-target,.root-drop').forEach(el=>el.classList.remove('drop-target','root-drop'))}
 document.body.addEventListener('dragstart',e=>{const card=e.target.closest('.task-node');if(!card)return;draggingId=card.dataset.id;card.classList.add('is-dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',draggingId)});

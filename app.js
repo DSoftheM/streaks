@@ -16,7 +16,7 @@ function load() {
     { id: crypto.randomUUID(), title: 'Walk 5,000 steps', target: '5,000 steps', hasTimer: false, duration: 30, startDate: today, endDate: addDays(today, 119), completed: {} }
   ] };
 }
-function save() { localStorage.setItem(KEY, JSON.stringify(state)); }
+function save() { localStorage.setItem(KEY, JSON.stringify(state)); window.DailySync?.queue(); }
 function daysBetween(a,b) { return Math.max(0, Math.round((new Date(`${b}T12:00:00`) - new Date(`${a}T12:00:00`)) / 86400000)); }
 function goalDays(g) { return daysBetween(g.startDate, g.endDate) + 1; }
 function isActive(g, day = dateKey()) { return day >= g.startDate && day <= g.endDate; }
@@ -65,4 +65,5 @@ $('#goal-form').onsubmit=e=>{e.preventDefault();const f=e.currentTarget, days=Nu
 $('#goals').onclick=e=>{const b=e.target.closest('[data-action]');if(!b)return;const g=state.goals.find(x=>x.id===b.closest('.goal-card').dataset.id);const a=b.dataset.action;if(a==='complete'){const t=dateKey();g.completed[t]?delete g.completed[t]:g.completed[t]=true;save();render();}if(a==='timer'){if(g.timerEnd&&timerRemaining(g))delete g.timerEnd;else g.timerEnd=new Date(Date.now()+g.duration*60000).toISOString();save();render();}if(a==='extend'){extendingId=g.id;$('#extend-name').textContent=g.title;$('#extend-dialog').showModal();}if(a==='edit')openGoal(g);if(a==='stats')openStats(g);if(a==='delete'&&confirm(`Delete “${g.title}”? This cannot be undone.`)){state.goals=state.goals.filter(x=>x.id!==g.id);save();render();}};
 $('#extend-form').onsubmit=e=>{e.preventDefault();const g=state.goals.find(x=>x.id===extendingId);g.endDate=addDays(g.endDate,Number(e.currentTarget.extendDays.value));save();closeDialogs();render();};
 $('#reset-data').onclick=()=>{if(confirm('Remove all goals and completion history from this browser?')){state={goals:[]};save();render();}};
+window.addEventListener('daily-sync-pulled',()=>{state=load();render();});
 render();
