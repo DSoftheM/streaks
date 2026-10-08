@@ -6,12 +6,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="tasks.css" />
+    <style>
+      .drag-hint{margin:-5px 0 16px;color:#627066;font-size:12px}.task-node[draggable="true"]{cursor:grab}.task-node.is-dragging{opacity:.38}.task-node.drop-target>.task-row{background:#eaf6db;outline:2px dashed #3e9d63;outline-offset:-3px}.task-list.root-drop{min-height:56px;outline:2px dashed #3e9d63;outline-offset:5px;border-radius:10px}.task-list.root-drop:empty:after{content:'Drop here to make this a top-level task';display:block;padding:18px;color:#627066;text-align:center;font-size:13px}
+    </style>
   </head>
   <body>
     <main class="app-shell">
       <header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">↗</span>daily<span>streaks</span></a><nav class="app-tabs" aria-label="App sections"><a href="index.html">Streaks</a><a class="active" href="tasks.html">Tasks</a></nav><span class="local">LOCAL ONLY</span></header>
       <section class="hero"><div><p class="eyebrow">YOUR WORKSPACE</p><h1>Clear the next<br /><em>small thing.</em></h1></div><button id="add-root" class="primary">+ New task</button></section>
       <section class="task-head"><div><p class="eyebrow">TO DO</p><h2 id="open-summary">No open tasks</h2></div><p>Complete every subtask to finish its parent.</p></section>
+      <p class="drag-hint">Drag a task onto another task to nest it. Drop it in the open list to move it back to the top.</p>
       <section id="task-list" class="task-list" aria-live="polite"></section>
       <section id="empty-state" class="empty"><div>✦</div><h2>Nothing waiting.</h2><p>Add a task, then break it down as far as you need.</p><button id="add-empty" class="primary">Create a task</button></section>
       <section id="completed-section" class="completed-section" hidden><button id="toggle-completed" class="completed-toggle">Completed <span id="completed-count"></span> <b>⌄</b></button><div id="completed-list" hidden></div></section>
